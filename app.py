@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 # Define your MLflow model name and version
 model_name = "House-pricing-model"
-model_version = "3"
+model_version = "4"
 
 # SQLite URI for MLflow tracking server
 mlflow_uri = "sqlite:///02-experiment_tracking/mlflow.db"  # Replace with the actual path to your mlflow.db file
@@ -52,10 +52,6 @@ class HousePriceInput(BaseModel):
     bathrooms: int = Field(..., example=2)
     stories: int = Field(..., example=2)
     parking: int = Field(..., example=1)
-    furnished: int = Field(..., example=0)
-    semi_furnished: int = Field(..., example=1)
-    unfurnished: int = Field(..., example=0)
-    mainroad_new: int = Field(..., example=1)
 
 
 # Define output schema using Pydantic BaseModel
@@ -72,7 +68,7 @@ async def predict_house_price(input_data: HousePriceInput):
     try:
         # Perform prediction using the loaded model
         prediction = loaded_model.predict(input_df)
-        return {"predicted_price": prediction[0]}  # Assuming a single prediction output
+        return {"predicted_price": round(prediction[0])}  # Assuming a single prediction output
     except Exception as e:
         logger.error(f"Prediction error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to make predictions")

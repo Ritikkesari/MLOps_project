@@ -16,5 +16,9 @@ This project is about end to end developing and deploying of ML model.
 
 --> After running above steps go to url : http://127.0.0.1:8000/docs
 
+# For mlflow history of model experiment tracking:
+
+--> go to 02-experiment_tracking folder and run : mlflow ui --backend-store-uri sqlite:///mlflow.db
+
 
 
