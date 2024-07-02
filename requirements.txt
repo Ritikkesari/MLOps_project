@@ -7,3 +7,5 @@ mlflow
 hyperopt
 xgboost
 ipython
+uvicorn
+fastapi
