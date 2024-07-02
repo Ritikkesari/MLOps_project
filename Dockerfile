@@ -2,13 +2,13 @@
 FROM python:3.9-slim
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /workspaces/MLOps_project
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY . /workspaces/MLOps_project
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN pip install --no-cache-dir -r /workspaces/MLOps_project/requirements.txt
 
 # Expose the port number that the FastAPI application should run on
 EXPOSE 8000

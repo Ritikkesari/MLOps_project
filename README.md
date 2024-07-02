@@ -14,5 +14,7 @@ This project is about end to end developing and deploying of ML model.
 - we can run app.py file in terminal we command : python app.py
 - or we can build docker image with Dockerfile which can later be run in any platform wit command : docker run -p 8000:8000 <image name>
 
+--> After running above steps go to url : http://127.0.0.1:8000/docs
+
 
 
