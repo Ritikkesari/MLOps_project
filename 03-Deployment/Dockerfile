@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 EXPOSE 8000
 
 # Define environment variables
-ENV MLFLOW_TRACKING_URI="sqlite:////02-experiment_tracking/mlflow.db"
+ENV MLFLOW_TRACKING_URI="sqlite:///02-experiment_tracking/mlflow.db"
 
 # Command to run the FastAPI application
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

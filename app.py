@@ -37,10 +37,13 @@ try:
 
     # Load the model
     loaded_model = mlflow.pyfunc.load_model(model_uri)
-    logger.info(f"Successfully loaded MLflow model '{model_name}' version '{model_version}' from '{model_uri}'")
+    logger.info(
+        f"Successfully loaded MLflow model '{model_name}' version '{model_version}' from '{model_uri}'"
+    )
 except Exception as e:
     logger.error(f"Failed to load MLflow model: {str(e)}")
     raise e
+
 
 # Define input schema using Pydantic BaseModel
 class HousePriceInput(BaseModel):
@@ -54,9 +57,11 @@ class HousePriceInput(BaseModel):
     unfurnished: int = Field(..., example=0)
     mainroad_new: int = Field(..., example=1)
 
+
 # Define output schema using Pydantic BaseModel
 class HousePriceOutput(BaseModel):
     predicted_price: float
+
 
 # Endpoint to predict house price
 @app.post("/predict", response_model=HousePriceOutput)
@@ -72,15 +77,18 @@ async def predict_house_price(input_data: HousePriceInput):
         logger.error(f"Prediction error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to make predictions")
 
+
 # Middleware to add process time header
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     import time
+
     start_time = time.time()
     response = await call_next(request)
     process_time = time.time() - start_time
     response.headers["X-Process-Time"] = str(process_time)
     return response
+
 
 # If running this script directly, start the FastAPI application using uvicorn
 if __name__ == "__main__":
