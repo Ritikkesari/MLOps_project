@@ -9,3 +9,5 @@ xgboost
 ipython
 uvicorn
 fastapi
+evidently
+logger
