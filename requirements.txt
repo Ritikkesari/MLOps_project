@@ -11,3 +11,4 @@ uvicorn
 fastapi
 evidently
 logger
+prefect

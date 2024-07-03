@@ -68,7 +68,9 @@ async def predict_house_price(input_data: HousePriceInput):
     try:
         # Perform prediction using the loaded model
         prediction = loaded_model.predict(input_df)
-        return {"predicted_price": round(prediction[0])}  # Assuming a single prediction output
+        return {
+            "predicted_price": round(prediction[0])
+        }  # Assuming a single prediction output
     except Exception as e:
         logger.error(f"Prediction error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to make predictions")
