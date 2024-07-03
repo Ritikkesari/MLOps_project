@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 import prefect
-from prefect import task, Flow
+from prefect import task, flow
+from sklearn.model_selection import train_test_split
 
-@task(log_print = True, name = "Data Read")
+@task(name = "Data Read")
 def read_data(path):
     df = pd.read_csv(path)
 
@@ -11,7 +12,7 @@ def read_data(path):
 
     return df
 
-@task(log_print = True, name = "Data Split")
+@task(name = "Data Split")
 def data_split(df):
 
     X = df.drop(["price","airconditioning","hotwaterheating","guestroom","prefarea","basement","mainroad","furnishingstatus"],axis = 1)
@@ -39,7 +40,7 @@ def data_split(df):
     test_data['stories'] = np.log(test_data['bedrooms']+1)
     test_data['parking'] = np.log(test_data['bedrooms']+1)
 
-    X_test = test_data.drop(["price","airconditioning","hotwaterheating","guestroom","prefarea","basement","mainroad","furnishingstatus"],axis = 1)
+    X_test = test_data.drop("price",axis = 1)
 
     y_test = test_data["price"]
 

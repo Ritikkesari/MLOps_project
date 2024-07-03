@@ -2,10 +2,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import mlflow
-from prefect import task, Flow
+import numpy as np
+from prefect import task, flow
 
 
-@task(log_print = True, name = "Train the model")
+@task(name = "Train the model")
 def model_experiment_with_mlflow(X_train,y_train,X_test,y_test):
 
     with mlflow.start_run():
